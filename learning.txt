@@ -1,0 +1,355 @@
+Mongodb : Dbms system where database is centered and through mongoosejs we handle the database
+Documented oriented database.
+Stores data in the form of the collections and the documents
+Gained popularity in Mid 2000s.
+
+
+Its start for storage of Humongous Amounnt of the data efffiently which rdms(MySQL, Oracle) doesn't do.
+
+Problems in Rdms : fixed Schema, cannot store differrnt types of the data, only work for structured data.
+Advantages of MongoDb : 
+Flexible Schema, Works very well with unstructured data.
+Natively Scalable as compared to the Rdms Dbs
+
+Data is stored in the form of the documents where Rdms stores in the form of tables for relation rdbms uses foregin keys where as mongodb uses refering for relationship among the data 
+
+One Db : multiple collections(users, products, orders): one collection multiple doucments(user: samad, arham ahsan,salim)
+
+Rdbms has tables mongodb has collections to store data
+Rdbms has stored data in a rows where as mongodb stores in a documents
+Rdbms have represet columns for show multiple data where mongodb uses fields 
+
+Documents in a Mongodb:
+Json type structure(Bson Internally)
+Primary key ._id for uniquely identify the data
+
+In One mongodb Server we have : 
+Datbases :  {d1,d2,d3}
+d1 collections :{c1,c2,c3.c4}
+c1 documents : { multiple documents , e1,e2,e3,e4,e5}
+
+
+Mongodb have both the features of Rdms and NoSQL also
+Rdbms : Schmea,trnsaction,Relationship
+NoSQL: Flexible Schema, Scalability
+
+
+Scalabitily*
+
+Rdbms(MySQL,oracle) supports vertical scaling we cannot put much amont of the data in a single machine.
+it works well  when first we increase storage system scale but after a certain time we increase more storafe but scaling constants thats where is fails
+
+cons of vertically scaling : single point of failure(as you store all of the data in a single machine so high chances of the data loss);
+performance issues
+loss of the data
+
+
+
+Mongodb uses practical Approach of Scaling systems : when load increases add new machine for storage which is called as horizontally scaling approach;
+
+Horizontally Scaling : Multiple machine connected over a network io.
+mongodb is highly scalable
+
+
+Use Cases of Mongodb:
+Product data management
+online applications
+streaming apps
+
+
+Sharding in mongodb*
+
+large data : data1<>data2<>data3<>
+Sharding means distributing data on a multiple machines so that it is highly scalable.
+
+Replica Sets*
+when we do sharding we store replica copies of one data multiple machines so that data loss prevents
+
+Mongodb is scalable with help of sharding and replica sets
+
+
+
+Data Modelling 
+Defining a data or how the structure looks likes is called as the data modellingin the forn of Json
+text : String
+Numerics : integer, double etc
+Date/time : Date,timestamps
+others : object,array,enums,null, etc
+
+
+How Mongodb stores the data ?
+
+Stores data in the form of Bson (binary Json)
+less space
+faster traversal
+large no of datatypes
+improved arrays speed
+
+Data Modelling in mongodb 
+two ways :
+representing entities like user, product etc
+relationships like user have product
+
+
+Relationship types :
+one to one 
+one to many
+many to many
+
+
+RelationShips : to implement relationships
+we have
+Embedding of data{ we show all data} load every data unfortunately
+Referencing {we refer the data using OBjectId , not full data loaded}
++
+ 
+
+ Embediing :
+ pros  
+ Single Query Access all data
+ Reduced Latency
+
+ cons 
+ Two much embedding can exceeds 16mb limit size of store document
+ excess of data leaked each time
+
+
+
+ Referencing :
+ pros
+ small documents
+ lazy loading
+ 
+ cons
+  
+
+ Increased Query Complexity
+ code complexity
+
+
+ // practical queries 
+
+show dbs
+
+use <database_name>
+
+show collections
+
+db.createCollection("<collection_name>")
+
+db.<old_collection_name>.renameCollection("<new_collection_name>")
+
+db.<collection_name>.drop()
+
+db.<collection_name>.insertOne({ key: "value", key2: "value2" })
+
+db.<collection_name>.insertMany([
+  { key: "value1", key2: "value2" },
+  { key: "value3", key2: "value4" }
+])
+
+db.<collection_name>.find()
+
+db.<collection_name>.findOne({ key: "value" })
+
+db.<collection_name>.find({ key: "value" })
+
+db.<collection_name>.find({ "nested_key.key": "value" })
+
+db.<collection_name>.find({ key: { $regex: /pattern/, $options: "i" } })
+
+db.<collection_name>.find().limit(5)
+
+db.<collection_name>.find().pretty()
+
+db.<collection_name>.find().skip(2)
+
+db.<collection_name>.find().sort({ key: 1 })
+
+db.<collection_name>.find().sort({ key: -1 })
+
+db.<collection_name>.find({ key: { $gt: value } })
+
+db.<collection_name>.find({ key: { $lt: value } })
+
+db.<collection_name>.find({ key: { $gte: value } })
+
+db.<collection_name>.find({ key: { $lte: value } })
+
+db.<collection_name>.find({ key: { $ne: value } })
+
+db.<collection_name>.find({ $and: [{ key1: "value1" }, { key2: "value2" }] })
+
+db.<collection_name>.find({ $or: [{ key1: "value1" }, { key2: "value2" }] })
+
+db.<collection_name>.find({ key: { $not: { $eq: "value" } } })
+
+db.<collection_name>.countDocuments()
+
+db.<collection_name>.updateOne({ key: "value" }, { $set: { key: "new_value" } })
+
+db.<collection_name>.updateOne({ key: "value" }, { $unset: { key: "" } })
+
+db.<collection_name>.updateOne({ key: "value" }, { $set: { new_key: "new_value" } })
+
+db.<collection_name>.updateMany({ key: "value" }, { $set: { key2: "new_value" } })
+
+db.<collection_name>.deleteOne({ key: "value" })
+
+db.<collection_name>.deleteMany({ key: "value" })
+
+db.<collection_name>.find({ key: { $exists: true } })
+
+db.<collection_name>.find({ key: { $exists: false } })
+
+db.<collection_name>.find({ key: { $all: ["value1", "value2"] } })
+
+db.<collection_name>.find({ key: { $type: "string" } })
+
+db.<collection_name>.find({ key: { $size: 3 } })
+
+db.<collection_name>.find({ key: { $elemMatch: { subKey: "value", subKey2: { $gt: 5 } } } })
+
+db.<collection_name>.find({ key: { $regex: /^pattern$/i } })
+
+db.<collection_name>.aggregate([
+  { <stage1> },
+  { <stage2> },
+  ...
+])
+
+
+db.<collection_name>.aggregate([
+  { $match: { key: "value" } }
+])
+
+
+db.<collection_name>.aggregate([
+  { $project: { key1: 1, key2: 1, _id: 0 } }
+])
+
+
+db.<collection_name>.aggregate([
+  { $group: { _id: "$key", total: { $sum: "$amount" } } }
+])
+
+
+db.<collection_name>.aggregate([
+  { $sort: { key: 1 } }
+])
+
+
+db.<collection_name>.aggregate([
+  { $sort: { key: 1 } }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $limit: 5 }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $skip: 2 }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $unwind: "$arrayField" }
+])
+
+
+
+db.<collection_name>.aggregate([
+  {
+    $lookup: {
+      from: "other_collection",
+      localField: "key",
+      foreignField: "key",
+      as: "joined_data"
+    }
+  }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $addFields: { newField: "value" } }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $replaceRoot: { newRoot: "$nestedDocument" } }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $match: { key: "value" } },
+  { $count: "total" }
+])
+
+
+
+db.<collection_name>.aggregate([
+  {
+    $facet: {
+      groupByCategory: [
+        { $group: { _id: "$category", total: { $sum: 1 } } }
+      ],
+      totalDocuments: [
+        { $count: "total" }
+      ]
+    }
+  }
+])
+
+
+
+
+db.<collection_name>.aggregate([
+  { $project: { total: { $add: ["$field1", "$field2"] } } }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $project: { difference: { $subtract: ["$field1", "$field2"] } } }
+])
+
+
+
+
+db.<collection_name>.aggregate([
+  { $project: { product: { $multiply: ["$field1", 2] } } }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $project: { ratio: { $divide: ["$field1", "$field2"] } } }
+])
+
+
+
+db.<collection_name>.aggregate([
+  { $project: { fullName: { $concat: ["$firstName", " ", "$lastName"] } } }
+])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
